@@ -13,6 +13,7 @@
 		DA0850522253A08400A54D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA0850512253A08400A54D69 /* Assets.xcassets */; };
 		DA0850552253A08400A54D69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA0850532253A08400A54D69 /* LaunchScreen.storyboard */; };
 		DAAEACFE2253A5E000C4BCFA /* MainVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEACFD2253A5E000C4BCFA /* MainVCCell.swift */; };
+		DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		DA0850542253A08400A54D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA0850562253A08400A54D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DAAEACFD2253A5E000C4BCFA /* MainVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainVCCell.swift; sourceTree = "<group>"; };
+		DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -58,6 +60,7 @@
 			children = (
 				DA08504A2253A08300A54D69 /* AppDelegate.swift */,
 				DA08504C2253A08300A54D69 /* MainVC.swift */,
+				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
 				DA08504E2253A08300A54D69 /* Main.storyboard */,
 				DAAEACFD2253A5E000C4BCFA /* MainVCCell.swift */,
 				DA0850512253A08400A54D69 /* Assets.xcassets */,
@@ -138,6 +141,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */,
 				DAAEACFE2253A5E000C4BCFA /* MainVCCell.swift in Sources */,
 				DA08504D2253A08300A54D69 /* MainVC.swift in Sources */,
 				DA08504B2253A08300A54D69 /* AppDelegate.swift in Sources */,
