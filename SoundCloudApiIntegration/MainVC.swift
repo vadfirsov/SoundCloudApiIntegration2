@@ -12,8 +12,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
 
     @IBOutlet weak var tableView: UITableView!
     
+    let network = NetworkManager()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        network.fetchSongArray()
+        
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
