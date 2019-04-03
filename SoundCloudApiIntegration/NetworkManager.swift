@@ -8,10 +8,19 @@
 
 import UIKit
 
+protocol NetworkDelegate {
+    func receivedSongImages(imageDic : [String : UIImage?])
+    func receivedSongArray(songArr : [SongDetailsModel])
+    //TO-DO: NEED TO HANDLE ERROR DELEGATE
+//    func receivedError(error : Error)
+}
+
 class NetworkManager {
     
+    var networkDelegate : NetworkDelegate?
+    
     let URL_STRING = "https://api.soundcloud.com/tracks?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
-    let DEMI_SONG_NAME = "eminem"
+    let DEMI_SONG_NAME = "ASTRIX"
     
     var songArray = [SongDetailsModel]()
     
@@ -26,26 +35,34 @@ class NetworkManager {
                 self.songArray = decodedValues
             } catch {
                 print("error acured decoding : \(error)")
+                //TO-DO: NEED TO HANDLE ERROR DELEGATE
+//                self.networkDelegate?.receivedError(error: <#T##Error#>)
             }
-            self.fetchSongImages()
+            self.networkDelegate?.receivedSongArray(songArr: self.songArray)
+            self.downloadSongImagesAndTitle()
 
-            for i in self.songArray.indices {
-                print(self.songArray[i].title)
-            }
         }.resume()
-        
+
     }
-    
-    func fetchSongImages() {
+    //DOWNLOADING THE IMAGES (PUTTING THE LABELS IN THE CELLS FIRST AND AFTER THE DOWNLOAD IS FINISHED PUTING THE IMAGE)
+    //TO-DO: DOWNLOAD AND PUT IMAGE EACH IN A TIME AND ADD LOADING ICON
+    func downloadSongImagesAndTitle() {
         var imageArr = [String : UIImage?]()
         DispatchQueue.main.async {
             for i in self.songArray.indices {
                 if (self.songArray[i].artwork_url != nil) {
-                    imageArr[self.songArray[i].title] = UIImage(named: self.songArray[i].artwork_url!)
+                    do {
+                        let imageUrl = URL(string: self.songArray[i].artwork_url!)
+                        let data = try Data(contentsOf: imageUrl!)
+                        imageArr[self.songArray[i].title] = UIImage(data: data)
+                    } catch let err {
+                        print ("Error : \(err.localizedDescription)")
+                    }
                 } else {
                     imageArr[self.songArray[i].title] = nil
                 }
             }
+            self.networkDelegate?.receivedSongImages(imageDic: imageArr)
         }
     }
 }

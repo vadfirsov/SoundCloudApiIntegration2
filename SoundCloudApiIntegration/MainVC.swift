@@ -9,27 +9,49 @@
 import UIKit
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
-
+    //TO-DO: MAKE LOADING ICONS ON EACH IMAGE
     @IBOutlet weak var tableView: UITableView!
     
-    let network = NetworkManager()
+    var songImageArray = [String : UIImage?]()
+    var songArray = [SongDetailsModel]()
+    
+    let networkDelegate = NetworkManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        network.fetchSongArray()
-        
+        networkDelegate.networkDelegate = self
+        networkDelegate.fetchSongArray()
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 100
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 5
+        return songArray.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainVCCell.CELL_ID, for: indexPath) as? MainVCCell else { return UITableViewCell() }
-        cell.songNameLabel.text = "lol just for now thoooooooooooooo"
+        cell.songNameLabel.text = songArray[indexPath.row].title
+        if songImageArray[songArray[indexPath.row].title] != nil {
+            cell.imageView?.image = songImageArray[songArray[indexPath.row].title]!!
+        }
         return cell
+        
     }
-
-
 }
 
+extension MainVC : NetworkDelegate {
+    func receivedSongArray(songArr: [SongDetailsModel]) {
+        songArray = songArr
+        DispatchQueue.main.sync {
+            tableView.reloadData()
+        }
+    }
+    
+    func receivedSongImages(imageDic: [String : UIImage?]) {
+        songImageArray = imageDic
+        tableView.reloadData()
+    }
+}
