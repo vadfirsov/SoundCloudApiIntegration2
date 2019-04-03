@@ -20,12 +20,12 @@ class NetworkManager {
     var networkDelegate : NetworkDelegate?
     
     let URL_STRING = "https://api.soundcloud.com/tracks?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
-    let DEMI_SONG_NAME = "eminem"
+//    let DEMI_SONG_NAME = "eminem"
     
     var songArray = [SongDetailsModel]()
     
-    func fetchSongArray() {
-        let url = URL(string: URL_STRING + DEMI_SONG_NAME)
+    func fetchSongArray(songName : String) {
+        let url = URL(string: URL_STRING + songName)
 //        let requestURL = URLRequest(url: url!) whats the difference??
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
