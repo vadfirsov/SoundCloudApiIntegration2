@@ -9,7 +9,7 @@
 import UIKit
 
 class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
-    //TO-DO: MAKE LOADING ICONS ON EACH IMAGE
+    
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
@@ -21,6 +21,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     override func viewDidLoad() {
         super.viewDidLoad()
         networkDelegate.networkDelegate = self
+        //just for now for testing
+        networkDelegate.fetchSongArray(songName: "eminem")
     }
     // SEARCHBAR SET UP AND SEARCH
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
@@ -41,6 +43,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         return songArray.count
     }
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        performSegue(withIdentifier: Constants.GO_TO_PLAYERVC_ID, sender: self)
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainVCCell.CELL_ID, for: indexPath) as? MainVCCell else { return UITableViewCell() }
         cell.showLoader()
@@ -53,9 +59,20 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
             cell.imageView?.image = songImageArray[songArray[indexPath.row].title]!!
             cell.hideLoader()
         }
-        
         return cell
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let destinationVC = segue.destination as? PlayerVC else { return }
+        let indexPath = tableView.indexPathForSelectedRow
         
+        if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
+            destinationVC.songArray = songArray
+            destinationVC.imageDic = songImageArray
+            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
+            destinationVC.songIndex = indexPath!.row
+            
+        }
     }
 }
 
