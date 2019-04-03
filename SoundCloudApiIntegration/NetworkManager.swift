@@ -20,7 +20,7 @@ class NetworkManager {
     var networkDelegate : NetworkDelegate?
     
     let URL_STRING = "https://api.soundcloud.com/tracks?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
-    let DEMI_SONG_NAME = "ASTRIX"
+    let DEMI_SONG_NAME = "eminem"
     
     var songArray = [SongDetailsModel]()
     

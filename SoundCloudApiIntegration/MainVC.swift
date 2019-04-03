@@ -33,9 +33,12 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: MainVCCell.CELL_ID, for: indexPath) as? MainVCCell else { return UITableViewCell() }
+        cell.showLoader()
         cell.songNameLabel.text = songArray[indexPath.row].title
+        
         if songImageArray[songArray[indexPath.row].title] != nil {
             cell.imageView?.image = songImageArray[songArray[indexPath.row].title]!!
+            cell.hideLoader()
         }
         return cell
         
@@ -53,5 +56,10 @@ extension MainVC : NetworkDelegate {
     func receivedSongImages(imageDic: [String : UIImage?]) {
         songImageArray = imageDic
         tableView.reloadData()
+        for i in 0...songImageArray.count {
+            if songImageArray[songArray[i].title] == nil {
+                songImageArray[songArray[i].title] = UIImage(named: Constants.NO_IMG)
+            }
+        }
     }
 }
