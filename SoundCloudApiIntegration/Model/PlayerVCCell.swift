@@ -10,7 +10,7 @@ import UIKit
 
 class PlayerVCCell: UICollectionViewCell {
     
-    @IBOutlet weak var songImageView: UIImageView!
+    @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var songNameLabel: UILabel!
     
     static let PLAYERVC_CELL_ID = "playerVCCell"

@@ -67,10 +67,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         let indexPath = tableView.indexPathForSelectedRow
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
-            destinationVC.songArray = songArray
-            destinationVC.imageDic = songImageArray
-            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
-            destinationVC.songIndex = indexPath!.row
+//            destinationVC.songArray = songArray
+//            destinationVC.imageDic = songImageArray
+//            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
+//            destinationVC.songIndex = indexPath!.row
             
         }
     }

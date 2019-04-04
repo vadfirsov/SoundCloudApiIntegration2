@@ -19,6 +19,8 @@
 		DAAEAD062254AF7E00C4BCFA /* PlayerVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */; };
 		DAAEAD082254AF8F00C4BCFA /* PlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */; };
 		DABBF8A22255D7BD00F78A5D /* HorizontalPagingCollectionVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A12255D7BD00F78A5D /* HorizontalPagingCollectionVC.swift */; };
+		DABBF8A42255E4AB00F78A5D /* SongPlayerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */; };
+		DABBF8A62255E91500F78A5D /* ViewControllerTEST.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A52255E91500F78A5D /* ViewControllerTEST.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -36,6 +38,8 @@
 		DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVCCell.swift; sourceTree = "<group>"; };
 		DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVC.swift; sourceTree = "<group>"; };
 		DABBF8A12255D7BD00F78A5D /* HorizontalPagingCollectionVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalPagingCollectionVC.swift; sourceTree = "<group>"; };
+		DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayerCollectionView.swift; sourceTree = "<group>"; };
+		DABBF8A52255E91500F78A5D /* ViewControllerTEST.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerTEST.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -70,19 +74,37 @@
 			children = (
 				DA08504A2253A08300A54D69 /* AppDelegate.swift */,
 				DAAEAD0322549FF600C4BCFA /* Constants.swift */,
-				DA08504C2253A08300A54D69 /* MainVC.swift */,
-				DABBF8A12255D7BD00F78A5D /* HorizontalPagingCollectionVC.swift */,
-				DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */,
-				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
-				DAAEAD0122547A9100C4BCFA /* SongDetailsModel.swift */,
+				DA1383692255EFE100DF795C /* View & Controller */,
+				DA1383682255EFB200DF795C /* Model */,
 				DA08504E2253A08300A54D69 /* Main.storyboard */,
-				DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */,
-				DAAEACFD2253A5E000C4BCFA /* MainVCCell.swift */,
+				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
+				DABBF8A52255E91500F78A5D /* ViewControllerTEST.swift */,
 				DA0850512253A08400A54D69 /* Assets.xcassets */,
 				DA0850532253A08400A54D69 /* LaunchScreen.storyboard */,
 				DA0850562253A08400A54D69 /* Info.plist */,
 			);
 			path = SoundCloudApiIntegration;
+			sourceTree = "<group>";
+		};
+		DA1383682255EFB200DF795C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				DAAEAD0122547A9100C4BCFA /* SongDetailsModel.swift */,
+				DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */,
+				DAAEACFD2253A5E000C4BCFA /* MainVCCell.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		DA1383692255EFE100DF795C /* View & Controller */ = {
+			isa = PBXGroup;
+			children = (
+				DA08504C2253A08300A54D69 /* MainVC.swift */,
+				DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */,
+				DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */,
+				DABBF8A12255D7BD00F78A5D /* HorizontalPagingCollectionVC.swift */,
+			);
+			path = "View & Controller";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -160,7 +182,9 @@
 				DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */,
 				DAAEACFE2253A5E000C4BCFA /* MainVCCell.swift in Sources */,
 				DA08504D2253A08300A54D69 /* MainVC.swift in Sources */,
+				DABBF8A42255E4AB00F78A5D /* SongPlayerCollectionView.swift in Sources */,
 				DA08504B2253A08300A54D69 /* AppDelegate.swift in Sources */,
+				DABBF8A62255E91500F78A5D /* ViewControllerTEST.swift in Sources */,
 				DAAEAD0222547A9100C4BCFA /* SongDetailsModel.swift in Sources */,
 				DAAEAD062254AF7E00C4BCFA /* PlayerVCCell.swift in Sources */,
 				DAAEAD0422549FF600C4BCFA /* Constants.swift in Sources */,
