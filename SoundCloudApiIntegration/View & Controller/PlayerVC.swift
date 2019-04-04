@@ -10,16 +10,22 @@ import UIKit
 
 class PlayerVC: UIViewController {
 
+    var songArray = [SongDetailsModel]()
+    var imageDic = [String : UIImage?]()
+    var songIndex = 0
+    
     var myCollectionViewController: SongPlayerCollectionView!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let myCollectionViewController = segue.destination as? SongPlayerCollectionView {
             self.myCollectionViewController = myCollectionViewController
         }
     }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        myCollectionViewController.dataSource = [0, 1, 2, 3, 4, 5, 6]
+        myCollectionViewController.songArray = songArray
+        myCollectionViewController.imageDic = imageDic
+        myCollectionViewController.songIndex = songIndex
     }
 }

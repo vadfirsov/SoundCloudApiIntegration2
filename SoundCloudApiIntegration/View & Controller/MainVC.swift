@@ -53,12 +53,14 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         cell.songNameLabel.text = songArray[indexPath.row].title
         
         //REMOVING THE PREVIOUS IMAGE THAT THE CELL HELD
-        cell.imageView?.image = nil
+        cell.songImageView?.image = nil
         
         if songImageArray[songArray[indexPath.row].title] != nil {
-            cell.imageView?.image = songImageArray[songArray[indexPath.row].title]!!
+            cell.songImageView?.image = songImageArray[songArray[indexPath.row].title]!!
             cell.hideLoader()
         }
+        
+        cell.setupImageDesign()
         return cell
     }
     
@@ -67,11 +69,10 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
         let indexPath = tableView.indexPathForSelectedRow
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
-//            destinationVC.songArray = songArray
-//            destinationVC.imageDic = songImageArray
-//            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
-//            destinationVC.songIndex = indexPath!.row
-            
+            destinationVC.songArray = songArray
+            destinationVC.imageDic = songImageArray
+            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
+            destinationVC.songIndex = indexPath!.row
         }
     }
 }

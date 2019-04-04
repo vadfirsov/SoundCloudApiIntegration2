@@ -14,4 +14,12 @@ class PlayerVCCell: UICollectionViewCell {
     @IBOutlet weak var songNameLabel: UILabel!
     
     static let PLAYERVC_CELL_ID = "playerVCCell"
+    
+    func setupImageDesign() {
+        songImage.layer.borderWidth = 2
+        songImage.layer.masksToBounds = false
+        songImage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        songImage.layer.cornerRadius = songImage.frame.height/8
+        songImage.clipsToBounds = true
+    }
 }
