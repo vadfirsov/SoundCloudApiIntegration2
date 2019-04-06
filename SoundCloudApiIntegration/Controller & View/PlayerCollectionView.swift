@@ -28,6 +28,8 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToNextCell(i:)) , name: .nextButtonPressed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToPrevCell(i:)) , name: .prevButtonPressed, object: nil)
+
 
         //SPACING BETWEEN EACH CELL
         collectionViewFlowLayout.minimumLineSpacing = 0
@@ -77,8 +79,17 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
 
     }
+    
+    @objc func scrollToPrevCell(i : Int){
+        indexShmindex -= 1
+        let indexPathToScrollTo = IndexPath(row: indexShmindex, section: 0)
+        collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
+        
+    }
 }
 
 extension Notification.Name {
     static let nextButtonPressed = Notification.Name(rawValue: "nextButtonPressed")
+    static let prevButtonPressed = Notification.Name(rawValue: "prevButtonPressed")
+
 }

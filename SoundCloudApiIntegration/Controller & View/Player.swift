@@ -28,4 +28,24 @@ class Player {
     func stopAndDealloc() {
         player = nil
     }
+    
+    func getNewSongIndex(isNextPressed : Bool, songCount : Int, songIndex : Int) -> Int {
+        
+        stopAndDealloc()
+        var plusOrMinus = 0
+        var indexToGoTo = songIndex
+        
+        plusOrMinus = isNextPressed ? 1 : -1
+        
+        if songIndex == songCount - 1 {
+            indexToGoTo = 0
+        } else if songIndex == 0 {
+            indexToGoTo = songCount - 1
+        } else {
+            indexToGoTo += plusOrMinus
+        }
+        return indexToGoTo
+    }
+    
+    
 }

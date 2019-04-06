@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14490.70" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="eoM-aD-Bhi">
-    <device id="retina5_9" orientation="portrait">
+    <device id="retina6_1" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14490.49"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="Stack View standard spacing" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -15,14 +16,14 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="MainVC" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="1K3-7u-0hZ">
-                                <rect key="frame" x="0.0" y="88" width="375" height="690"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="774"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <searchBar key="tableHeaderView" contentMode="redraw" id="P6B-dz-BIB">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="414" height="44"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                     <textInputTraits key="textInputTraits"/>
                                     <connections>
@@ -31,26 +32,26 @@
                                 </searchBar>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainVCCell" rowHeight="127" id="Cnr-lv-Bzn" customClass="MainVCCell" customModule="SoundCloudApiIntegration" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="72" width="375" height="127"/>
+                                        <rect key="frame" x="0.0" y="72" width="414" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cnr-lv-Bzn" id="JXW-al-nnT">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="126.66666666666667"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="126.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="wqm-Nn-gBU">
-                                                    <rect key="frame" x="15" y="11" width="105" height="105"/>
+                                                    <rect key="frame" x="20" y="11" width="105" height="105"/>
                                                     <constraints>
                                                         <constraint firstAttribute="width" secondItem="wqm-Nn-gBU" secondAttribute="height" multiplier="1:1" id="tBy-wt-PuF"/>
                                                     </constraints>
                                                 </imageView>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Name - Song Name" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="I7s-cC-ObP">
-                                                    <rect key="frame" x="135.66666666666663" y="11" width="224.33333333333337" height="105"/>
+                                                    <rect key="frame" x="140.5" y="11" width="214.5" height="105"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="23"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <activityIndicatorView opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="cax-zT-whp">
-                                                    <rect key="frame" x="57.666666666666657" y="53.666666666666664" width="20" height="19.999999999999993"/>
+                                                    <rect key="frame" x="62.5" y="53.5" width="20" height="20"/>
                                                 </activityIndicatorView>
                                             </subviews>
                                             <constraints>
@@ -103,11 +104,11 @@
             <objects>
                 <viewController id="jVL-5a-fCW" customClass="PlayerView" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ro2-nh-vOq">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <containerView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xGO-Tw-NW2">
-                                <rect key="frame" x="0.0" y="88" width="375" height="375"/>
+                                <rect key="frame" x="0.0" y="88" width="414" height="414"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xGO-Tw-NW2" secondAttribute="height" multiplier="1:1" id="Put-eB-KJl"/>
                                 </constraints>
@@ -115,79 +116,100 @@
                                     <segue destination="Mmh-Gc-6o8" kind="embed" id="7d0-lP-AAO"/>
                                 </connections>
                             </containerView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5g-Gz-LU2">
-                                <rect key="frame" x="40" y="488" width="295" height="30"/>
-                                <color key="backgroundColor" red="0.67951673509999999" green="0.33706290490000002" blue="0.88590577410000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" alignment="center" spacing="46" translatesAutoresizingMaskIntoConstraints="NO" id="GvF-m5-5yy">
-                                <rect key="frame" x="55" y="652" width="265" height="72"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cqb-14-iIM">
+                                <rect key="frame" x="40" y="527" width="334" height="310"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJ6-vq-mGz">
-                                        <rect key="frame" x="0.0" y="0.0" width="34.333333333333336" height="72"/>
-                                        <color key="backgroundColor" red="0.073097059620000002" green="0.1721500534" blue="0.35598429570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
-                                        <state key="normal" title="&lt;"/>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="H5g-Gz-LU2">
+                                        <rect key="frame" x="0.0" y="0.0" width="334" height="30"/>
+                                        <color key="backgroundColor" red="0.67951673509999999" green="0.33706290490000002" blue="0.88590577410000004" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zZG-tQ-A8U">
+                                        <rect key="frame" x="-2" y="119" width="338" height="31"/>
                                         <connections>
-                                            <action selector="prevButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="wot-lg-Q5N"/>
+                                            <action selector="sliderTouchDown:" destination="jVL-5a-fCW" eventType="touchDown" id="VZT-PU-Y9V"/>
+                                            <action selector="sliderTouchUpInside:" destination="jVL-5a-fCW" eventType="touchUpInside" id="En8-rh-UTN"/>
                                         </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqC-jf-JNH">
-                                        <rect key="frame" x="80.333333333333343" y="12" width="100.66666666666666" height="48"/>
-                                        <color key="backgroundColor" red="1" green="0.7815312177" blue="0.58382166140000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="48" id="SPG-fP-UGP"/>
-                                            <constraint firstAttribute="width" constant="100.66666666666666" id="bt6-sW-H0n"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
-                                        <state key="normal" title="PAUSE"/>
-                                        <connections>
-                                            <action selector="playePauseButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="qjW-gR-R8h"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upm-jH-k32">
-                                        <rect key="frame" x="227" y="0.0" width="38" height="72"/>
-                                        <color key="backgroundColor" red="0.073097059620000002" green="0.1721500534" blue="0.35598429570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
-                                        <state key="normal" title="&gt;"/>
-                                        <connections>
-                                            <action selector="nextButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="3BZ-RK-L2J"/>
-                                        </connections>
-                                    </button>
+                                    </slider>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacingType="standard" translatesAutoresizingMaskIntoConstraints="NO" id="GvF-m5-5yy">
+                                        <rect key="frame" x="0.0" y="238" width="334" height="72"/>
+                                        <subviews>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EJ6-vq-mGz">
+                                                <rect key="frame" x="0.0" y="0.0" width="33" height="72"/>
+                                                <color key="backgroundColor" red="0.073097059620000002" green="0.1721500534" blue="0.35598429570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                                <state key="normal" title="&lt;"/>
+                                                <connections>
+                                                    <action selector="prevButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="wot-lg-Q5N"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="TqC-jf-JNH">
+                                                <rect key="frame" x="116.5" y="12" width="101" height="48"/>
+                                                <color key="backgroundColor" red="1" green="0.7815312177" blue="0.58382166140000002" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="48" id="SPG-fP-UGP"/>
+                                                    <constraint firstAttribute="width" constant="100.66666666666666" id="bt6-sW-H0n"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="30"/>
+                                                <state key="normal" title="PAUSE"/>
+                                                <connections>
+                                                    <action selector="playePauseButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="qjW-gR-R8h"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Upm-jH-k32">
+                                                <rect key="frame" x="301" y="0.0" width="33" height="72"/>
+                                                <color key="backgroundColor" red="0.073097059620000002" green="0.1721500534" blue="0.35598429570000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                                <fontDescription key="fontDescription" type="boldSystem" pointSize="50"/>
+                                                <state key="normal" title="&gt;"/>
+                                                <connections>
+                                                    <action selector="nextButton:" destination="jVL-5a-fCW" eventType="touchUpInside" id="3BZ-RK-L2J"/>
+                                                </connections>
+                                            </button>
+                                        </subviews>
+                                    </stackView>
                                 </subviews>
+                                <constraints>
+                                    <constraint firstItem="H5g-Gz-LU2" firstAttribute="top" secondItem="cqb-14-iIM" secondAttribute="top" id="Kyz-Qy-blY"/>
+                                    <constraint firstAttribute="trailing" secondItem="GvF-m5-5yy" secondAttribute="trailing" id="QqY-3U-EGi"/>
+                                    <constraint firstItem="H5g-Gz-LU2" firstAttribute="leading" secondItem="cqb-14-iIM" secondAttribute="leading" id="ZSJ-s8-qpf"/>
+                                    <constraint firstAttribute="trailing" secondItem="zZG-tQ-A8U" secondAttribute="trailing" id="c7F-ZS-8C8"/>
+                                    <constraint firstAttribute="trailing" secondItem="H5g-Gz-LU2" secondAttribute="trailing" id="d5N-bg-iSS"/>
+                                    <constraint firstItem="GvF-m5-5yy" firstAttribute="leading" secondItem="cqb-14-iIM" secondAttribute="leading" id="sFs-Or-5yJ"/>
+                                    <constraint firstAttribute="bottom" secondItem="GvF-m5-5yy" secondAttribute="bottom" id="uwh-Ev-a3Y"/>
+                                    <constraint firstItem="zZG-tQ-A8U" firstAttribute="leading" secondItem="cqb-14-iIM" secondAttribute="leading" id="yBm-qR-Ndx"/>
+                                </constraints>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" red="0.098040141169999998" green="0.090123303229999993" blue="0.098039098079999998" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                         <constraints>
-                            <constraint firstItem="H5g-Gz-LU2" firstAttribute="top" secondItem="xGO-Tw-NW2" secondAttribute="bottom" constant="25" id="1Je-Xi-pMF"/>
-                            <constraint firstItem="pUO-I6-PyR" firstAttribute="bottom" secondItem="GvF-m5-5yy" secondAttribute="bottom" constant="54" id="69i-1i-3MJ"/>
-                            <constraint firstItem="pUO-I6-PyR" firstAttribute="trailing" secondItem="H5g-Gz-LU2" secondAttribute="trailing" constant="40" id="B3p-6h-Rnq"/>
-                            <constraint firstItem="GvF-m5-5yy" firstAttribute="leading" secondItem="pUO-I6-PyR" secondAttribute="leading" constant="55" id="GUD-Wn-ma3"/>
-                            <constraint firstItem="pUO-I6-PyR" firstAttribute="trailing" secondItem="GvF-m5-5yy" secondAttribute="trailing" constant="55" id="H6k-9f-cFU"/>
+                            <constraint firstItem="pUO-I6-PyR" firstAttribute="trailing" secondItem="cqb-14-iIM" secondAttribute="trailing" constant="40" id="7sN-Xh-TKB"/>
+                            <constraint firstItem="pUO-I6-PyR" firstAttribute="bottom" secondItem="cqb-14-iIM" secondAttribute="bottom" constant="25" id="MZn-gC-32t"/>
                             <constraint firstItem="xGO-Tw-NW2" firstAttribute="top" secondItem="pUO-I6-PyR" secondAttribute="top" id="QYv-NO-PQy"/>
+                            <constraint firstItem="cqb-14-iIM" firstAttribute="top" secondItem="xGO-Tw-NW2" secondAttribute="bottom" constant="25" id="QlP-aJ-MBv"/>
                             <constraint firstItem="xGO-Tw-NW2" firstAttribute="trailing" secondItem="pUO-I6-PyR" secondAttribute="trailing" id="mfg-kW-ns8"/>
+                            <constraint firstItem="cqb-14-iIM" firstAttribute="leading" secondItem="pUO-I6-PyR" secondAttribute="leading" constant="40" id="nkS-7p-3fw"/>
                             <constraint firstItem="xGO-Tw-NW2" firstAttribute="leading" secondItem="pUO-I6-PyR" secondAttribute="leading" id="p5Q-kH-Q7G"/>
-                            <constraint firstItem="H5g-Gz-LU2" firstAttribute="leading" secondItem="pUO-I6-PyR" secondAttribute="leading" constant="40" id="r9V-Uf-EUG"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="pUO-I6-PyR"/>
                     </view>
                     <connections>
                         <outlet property="playPauseOutlet" destination="TqC-jf-JNH" id="TcZ-XS-Wsf"/>
+                        <outlet property="sliderOutlet" destination="zZG-tQ-A8U" id="pPT-bN-2mY"/>
                         <outlet property="songNameLabel" destination="H5g-Gz-LU2" id="657-Dz-hez"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nT-AH-db1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2760.8000000000002" y="-100.49261083743843"/>
+            <point key="canvasLocation" x="2757.971014492754" y="-101.11607142857143"/>
         </scene>
         <!--Player Collection View-->
         <scene sceneID="gtM-qN-kf0">
             <objects>
                 <collectionViewController id="Mmh-Gc-6o8" customClass="PlayerCollectionView" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="FmB-hH-qKR">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="375"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zbw-dK-vqd">
@@ -198,7 +220,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" reuseIdentifier="playerVCCell" id="nhc-Ma-L0k" customClass="PlayerVCCell" customModule="SoundCloudApiIntegration" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="-157.66666666666666" width="379" height="690"/>
+                                <rect key="frame" x="0.0" y="-138" width="379" height="690"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="379" height="690"/>
@@ -238,7 +260,7 @@
             <objects>
                 <navigationController id="eoM-aD-Bhi" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="ODJ-zQ-Fvy">
-                        <rect key="frame" x="0.0" y="44" width="375" height="44"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <connections>
