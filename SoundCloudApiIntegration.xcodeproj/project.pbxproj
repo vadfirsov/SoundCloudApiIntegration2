@@ -18,7 +18,9 @@
 		DAAEAD0422549FF600C4BCFA /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD0322549FF600C4BCFA /* Constants.swift */; };
 		DAAEAD062254AF7E00C4BCFA /* PlayerVCCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */; };
 		DAAEAD082254AF8F00C4BCFA /* PlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */; };
-		DABBF8A42255E4AB00F78A5D /* SongPlayerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */; };
+		DABBF8A42255E4AB00F78A5D /* PlayerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */; };
+		DAF3471F225725B50032AC66 /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3471E225725B50032AC66 /* NetworkDelegate.swift */; };
+		DAF34721225874C50032AC66 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF34720225874C50032AC66 /* SongPlayer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -35,7 +37,9 @@
 		DAAEAD0322549FF600C4BCFA /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		DAAEAD052254AF7E00C4BCFA /* PlayerVCCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVCCell.swift; sourceTree = "<group>"; };
 		DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVC.swift; sourceTree = "<group>"; };
-		DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayerCollectionView.swift; sourceTree = "<group>"; };
+		DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCollectionView.swift; sourceTree = "<group>"; };
+		DAF3471E225725B50032AC66 /* NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
+		DAF34720225874C50032AC66 /* SongPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				DA1383692255EFE100DF795C /* View & Controller */,
 				DA1383682255EFB200DF795C /* Model */,
 				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
+				DAF3471E225725B50032AC66 /* NetworkDelegate.swift */,
 				DA0850512253A08400A54D69 /* Assets.xcassets */,
 				DA0850532253A08400A54D69 /* LaunchScreen.storyboard */,
 				DA0850562253A08400A54D69 /* Info.plist */,
@@ -96,7 +101,8 @@
 				DA08504E2253A08300A54D69 /* Main.storyboard */,
 				DA08504C2253A08300A54D69 /* MainVC.swift */,
 				DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */,
-				DABBF8A32255E4AB00F78A5D /* SongPlayerCollectionView.swift */,
+				DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */,
+				DAF34720225874C50032AC66 /* SongPlayer.swift */,
 			);
 			path = "View & Controller";
 			sourceTree = "<group>";
@@ -173,9 +179,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */,
+				DAF34721225874C50032AC66 /* SongPlayer.swift in Sources */,
+				DAF3471F225725B50032AC66 /* NetworkDelegate.swift in Sources */,
 				DAAEACFE2253A5E000C4BCFA /* MainVCCell.swift in Sources */,
 				DA08504D2253A08300A54D69 /* MainVC.swift in Sources */,
-				DABBF8A42255E4AB00F78A5D /* SongPlayerCollectionView.swift in Sources */,
+				DABBF8A42255E4AB00F78A5D /* PlayerCollectionView.swift in Sources */,
 				DA08504B2253A08300A54D69 /* AppDelegate.swift in Sources */,
 				DAAEAD0222547A9100C4BCFA /* SongDetailsModel.swift in Sources */,
 				DAAEAD062254AF7E00C4BCFA /* PlayerVCCell.swift in Sources */,

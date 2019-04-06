@@ -8,24 +8,19 @@
 
 import UIKit
 
-protocol NetworkDelegate {
-    func receivedSongImages(imageDic : [String : UIImage?])
-    func receivedSongArray(songArr : [SongDetailsModel])
-    //TO-DO: NEED TO HANDLE ERROR DELEGATE
-//    func receivedError(error : Error)
-}
+
 
 class NetworkManager {
     
     var networkDelegate : NetworkDelegate?
-    
-    let URL_STRING = "https://api.soundcloud.com/tracks?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
-//    let DEMI_SONG_NAME = "eminem"
-    
+    let BASE_URL = "https://api.soundcloud.com/tracks"
+    let GET_ARR_URL = "?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
+    let GET_SONG_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
     var songArray = [SongDetailsModel]()
     
     func fetchSongArray(songName : String) {
-        let url = URL(string: URL_STRING + songName)
+        let url = URL(string: BASE_URL + GET_ARR_URL + songName)
+        print(url!)
 //        let requestURL = URLRequest(url: url!) whats the difference??
         
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
@@ -64,5 +59,26 @@ class NetworkManager {
             }
             self.networkDelegate?.receivedSongImages(imageDic: imageArr)
         }
+    }
+    
+    func getSong(songID : String) {
+//        let songUrl = URL(string: BASE_URL + GET_SONG_URL)
+        
+        
+//        print(songUrl!)
+//        //DOWNLOADS THE SONG IN THE URL AND PUTS IT IN DATA
+//        var task: URLSessionTask? = nil
+//        if let songUrl = songUrl {
+//            task = URLSession.shared.dataTask(with: songUrl, completionHandler: { data, response, error in
+//                if let data = data {
+//                    self.networkDelegate?.didDownloadSong(data: data)
+//                } else if let error = error {
+//                    print("error acured \(error)")
+//                }
+//            })
+//            task?.resume()
+//        }
+//        print("wha")
+
     }
 }

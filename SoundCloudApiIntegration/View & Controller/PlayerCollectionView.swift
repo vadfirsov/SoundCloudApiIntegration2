@@ -7,22 +7,41 @@
 //
 
 import UIKit
+import AVFoundation
 
-class SongPlayerCollectionView : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+    //TO-DO: ADD LOADER WHEN SONG LOADING
     
     private var collectionViewFlowLayout : UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
     
+    let networkDelegate = NetworkManager()
+    
     var songArray = [SongDetailsModel]()
     var imageDic = [String : UIImage?]()
     var songIndex = 0
     var isLoaded = false
-    var someNum = 0
+    
+    var player = AVPlayer()
+    let BASE_URL = "https://api.soundcloud.com/tracks/"
+    let CLIENT_ID_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        //SPACING BETWEEN EACH CELL
         collectionViewFlowLayout.minimumLineSpacing = 0
+        //SETTING NETWORK DELEGATE TO SELF
+        networkDelegate.networkDelegate = self
+        
+    }
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        
+        let songID = String(songArray[songIndex].id)
+        let url = URL(string: BASE_URL + songID + CLIENT_ID_URL)
+        player = AVPlayer.init(url: url!)
+        player.play()
     }
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
@@ -38,33 +57,32 @@ class SongPlayerCollectionView : UICollectionViewController, UICollectionViewDel
         return 40
     }
     
-    private func configureCollectionViewLayoutItemSize() {
-        let inset : CGFloat = calculateSectionInsert()
-        //THE SPACING FROM LEFT AND RIGHT PARENT VIEW EDGES TO THE CELL
-        collectionViewFlowLayout.sectionInset = UIEdgeInsets(top: 0, left: inset, bottom: 0, right: inset)
-        //THE DEFAULT SIZE TO USE FOR A CELL
-        collectionViewFlowLayout.itemSize = CGSize(width: collectionViewFlowLayout.collectionView!.frame.size.width - inset * 2, height: collectionViewFlowLayout.collectionView!.frame.size.height)
-    }
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 100000
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-            guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerVCCell.PLAYERVC_CELL_ID, for: indexPath) as? PlayerVCCell else { return UICollectionViewCell() }
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerVCCell.PLAYERVC_CELL_ID, for: indexPath) as? PlayerVCCell else { return UICollectionViewCell() }
 
-            cell.songNameLabel.text = songArray[indexPath.row % songArray.count].title
-            cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
+        cell.songNameLabel.text = songArray[indexPath.row % songArray.count].title
+        cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
         
-            cell.setupImageDesign()
-                return cell
+        cell.setupImageDesign()
+        return cell
     }
     
+    //MAKES THE CELL THE SIZE OF THE VIEW
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
+}
+
+extension PlayerCollectionView : NetworkDelegate {
+    func didDownloadSong(data: Data) {
+        print("SONG HAS BEEN DOWLOADED")
+    }
 }
 
 

@@ -14,9 +14,9 @@ class PlayerVC: UIViewController {
     var imageDic = [String : UIImage?]()
     var songIndex = 0
     
-    var myCollectionViewController: SongPlayerCollectionView!
+    var myCollectionViewController: PlayerCollectionView!
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let myCollectionViewController = segue.destination as? SongPlayerCollectionView {
+        if let myCollectionViewController = segue.destination as? PlayerCollectionView {
             self.myCollectionViewController = myCollectionViewController
         }
     }
