@@ -20,7 +20,7 @@
 		DAAEAD082254AF8F00C4BCFA /* PlayerVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */; };
 		DABBF8A42255E4AB00F78A5D /* PlayerCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */; };
 		DAF3471F225725B50032AC66 /* NetworkDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF3471E225725B50032AC66 /* NetworkDelegate.swift */; };
-		DAF34721225874C50032AC66 /* SongPlayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF34720225874C50032AC66 /* SongPlayer.swift */; };
+		DAF34721225874C50032AC66 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAF34720225874C50032AC66 /* PlayerController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -39,7 +39,7 @@
 		DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerVC.swift; sourceTree = "<group>"; };
 		DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerCollectionView.swift; sourceTree = "<group>"; };
 		DAF3471E225725B50032AC66 /* NetworkDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkDelegate.swift; sourceTree = "<group>"; };
-		DAF34720225874C50032AC66 /* SongPlayer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongPlayer.swift; sourceTree = "<group>"; };
+		DAF34720225874C50032AC66 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,7 +102,7 @@
 				DA08504C2253A08300A54D69 /* MainVC.swift */,
 				DAAEAD072254AF8F00C4BCFA /* PlayerVC.swift */,
 				DABBF8A32255E4AB00F78A5D /* PlayerCollectionView.swift */,
-				DAF34720225874C50032AC66 /* SongPlayer.swift */,
+				DAF34720225874C50032AC66 /* PlayerController.swift */,
 			);
 			path = "View & Controller";
 			sourceTree = "<group>";
@@ -179,7 +179,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */,
-				DAF34721225874C50032AC66 /* SongPlayer.swift in Sources */,
+				DAF34721225874C50032AC66 /* PlayerController.swift in Sources */,
 				DAF3471F225725B50032AC66 /* NetworkDelegate.swift in Sources */,
 				DAAEACFE2253A5E000C4BCFA /* MainVCCell.swift in Sources */,
 				DA08504D2253A08300A54D69 /* MainVC.swift in Sources */,

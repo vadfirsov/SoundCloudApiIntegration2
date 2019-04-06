@@ -12,37 +12,29 @@ import AVFoundation
 class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     //TO-DO: ADD LOADER WHEN SONG LOADING
     
+    //WHATS THE DIFFERENCE BETWEEN private var collectionViewFlowLayout = UICollectionViewFlowLayout() AND THIS?
     private var collectionViewFlowLayout : UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
     
-    let networkDelegate = NetworkManager()
+    
+
+    
+//    let player = PlayerController()
     
     var songArray = [SongDetailsModel]()
     var imageDic = [String : UIImage?]()
     var songIndex = 0
     var isLoaded = false
     
-    var player = AVPlayer()
-    let BASE_URL = "https://api.soundcloud.com/tracks/"
-    let CLIENT_ID_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         //SPACING BETWEEN EACH CELL
         collectionViewFlowLayout.minimumLineSpacing = 0
-        //SETTING NETWORK DELEGATE TO SELF
-        networkDelegate.networkDelegate = self
-        
     }
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
-        
-        let songID = String(songArray[songIndex].id)
-        let url = URL(string: BASE_URL + songID + CLIENT_ID_URL)
-        player = AVPlayer.init(url: url!)
-        player.play()
-    }
+    
+    
+    // ------------------------- SETTING UP THE COLLECTION VIEW ----------------------------
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isLoaded == false {
@@ -65,7 +57,7 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerVCCell.PLAYERVC_CELL_ID, for: indexPath) as? PlayerVCCell else { return UICollectionViewCell() }
 
-        cell.songNameLabel.text = songArray[indexPath.row % songArray.count].title
+//        cell.songNameLabel.text = songArray[indexPath.row % songArray.count].title
         cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
         
         cell.setupImageDesign()
@@ -76,13 +68,5 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
-    
 }
-
-extension PlayerCollectionView : NetworkDelegate {
-    func didDownloadSong(data: Data) {
-        print("SONG HAS BEEN DOWLOADED")
-    }
-}
-
 
