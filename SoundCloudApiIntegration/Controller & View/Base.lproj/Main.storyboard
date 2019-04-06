@@ -98,10 +98,10 @@
             </objects>
             <point key="canvasLocation" x="1844.9275362318842" y="-99.107142857142847"/>
         </scene>
-        <!--PlayerVC-->
+        <!--Player View-->
         <scene sceneID="bym-HC-bPg">
             <objects>
-                <viewController id="jVL-5a-fCW" customClass="PlayerVC" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="jVL-5a-fCW" customClass="PlayerView" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="ro2-nh-vOq">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="812"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -175,6 +175,7 @@
                     </view>
                     <connections>
                         <outlet property="playPauseOutlet" destination="TqC-jf-JNH" id="TcZ-XS-Wsf"/>
+                        <outlet property="songNameLabel" destination="H5g-Gz-LU2" id="657-Dz-hez"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4nT-AH-db1" userLabel="First Responder" sceneMemberID="firstResponder"/>

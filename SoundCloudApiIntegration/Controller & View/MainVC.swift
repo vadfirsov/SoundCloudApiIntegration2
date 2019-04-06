@@ -65,7 +65,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationVC = segue.destination as? PlayerVC else { return }
+        guard let destinationVC = segue.destination as? PlayerView else { return }
         let indexPath = tableView.indexPathForSelectedRow
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
