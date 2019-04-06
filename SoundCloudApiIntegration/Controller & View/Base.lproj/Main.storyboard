@@ -128,6 +128,7 @@
                                     </label>
                                     <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="zZG-tQ-A8U">
                                         <rect key="frame" x="-2" y="119" width="338" height="31"/>
+                                        <color key="backgroundColor" red="0.7342163706" green="0.28675527369999998" blue="0.29078293550000001" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
                                         <connections>
                                             <action selector="sliderTouchDown:" destination="jVL-5a-fCW" eventType="touchDown" id="VZT-PU-Y9V"/>
                                             <action selector="sliderTouchUpInside:" destination="jVL-5a-fCW" eventType="touchUpInside" id="En8-rh-UTN"/>

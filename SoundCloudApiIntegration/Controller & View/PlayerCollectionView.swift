@@ -86,10 +86,13 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
         
     }
+    
+    
 }
 
 extension Notification.Name {
     static let nextButtonPressed = Notification.Name(rawValue: "nextButtonPressed")
     static let prevButtonPressed = Notification.Name(rawValue: "prevButtonPressed")
+    static let songDidDownload = Notification.Name(rawValue: "songDidDownload") //DOESNT BELONG HERE
 
 }

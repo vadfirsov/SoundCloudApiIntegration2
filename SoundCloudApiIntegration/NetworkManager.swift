@@ -15,13 +15,14 @@ class NetworkManager {
     var networkDelegate : NetworkDelegate?
     let BASE_URL = "https://api.soundcloud.com/tracks"
     let GET_ARR_URL = "?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
+    
+    let GET_SONG_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
     var songArray = [SongDetailsModel]()
     
     func fetchSongArray(songName : String) {
         let url = URL(string: BASE_URL + GET_ARR_URL + songName)
         print(url!)
 //        let requestURL = URLRequest(url: url!) whats the difference??
-        
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             guard let data = data else { return }
             do {
@@ -57,6 +58,21 @@ class NetworkManager {
                 }
             }
             self.networkDelegate?.receivedSongImages(imageDic: imageArr)
+        }
+    }
+    var task : URLSessionTask?
+
+    func getSong(songID : String) {
+        let urlString = BASE_URL + "/" + songID + GET_SONG_URL
+        let songUrl = URL(string: urlString)
+        //DOWNLOADS THE SONG IN THE URL AND PUTS IT IN DATA
+        if let songUrl = songUrl {
+            task = URLSession.shared.dataTask(with: songUrl, completionHandler: { data, response, error in
+                if let data = data {
+                    self.networkDelegate?.downloadCompleted(data: data)
+                }
+            })
+            task?.resume()
         }
     }
 }
