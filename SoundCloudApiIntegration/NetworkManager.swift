@@ -17,7 +17,7 @@ class NetworkManager {
     let GET_ARR_URL = "?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
     
     let GET_SONG_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
-    var songArray = [SongDetailsModel]()
+    var songArray = [Song]()
     
     func fetchSongArray(songName : String) {
         let url = URL(string: BASE_URL + GET_ARR_URL + songName)
@@ -26,7 +26,7 @@ class NetworkManager {
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             guard let data = data else { return }
             do {
-                let decodedValues = try JSONDecoder().decode([SongDetailsModel].self, from: data)
+                let decodedValues = try JSONDecoder().decode([Song].self, from: data)
                 self.songArray = decodedValues
             } catch {
                 print("error acured decoding : \(error)")

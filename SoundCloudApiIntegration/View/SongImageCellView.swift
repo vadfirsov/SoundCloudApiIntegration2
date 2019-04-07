@@ -11,7 +11,17 @@ import UIKit
 class SongImageCellView: UICollectionViewCell {
     
     @IBOutlet weak var songImage: UIImageView!
-    @IBOutlet weak var songNameLabel: UILabel!
+
+    var song : Song! {
+        didSet {
+            if song.artwork_url != nil {
+                songImage.loadImageUsignUrlString(urlString: song.artwork_url!)
+            } else {
+                songImage.image = UIImage(named: Constants.NO_IMG)
+            }
+            setupImageDesign()
+        }
+    }
     
     static let PLAYERVC_CELL_ID = "playerVCCell"
     

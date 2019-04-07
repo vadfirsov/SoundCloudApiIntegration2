@@ -8,7 +8,7 @@
 
 import UIKit
 
-struct SongDetailsModel : Decodable { //or class tho?
+struct Song : Decodable { //or class tho?
     let id : Int
     let title : String
     let artwork_url : String?

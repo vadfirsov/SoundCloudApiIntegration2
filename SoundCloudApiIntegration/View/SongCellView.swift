@@ -15,6 +15,21 @@ class SongCellView: UITableViewCell {
     
     @IBOutlet weak var loaderView: UIActivityIndicatorView!
     
+    var songViewModel : SongViewModel! {
+        didSet {
+            showLoader()
+            songNameLabel.text = songViewModel.songTitle
+            if songViewModel.artWorkUrlString != nil {
+                songImageView.loadImageUsignUrlString(urlString: songViewModel.artWorkUrlString!)
+                hideLoader()
+            } else {
+                songImageView.image = UIImage(named: Constants.NO_IMG)
+                hideLoader()
+            }
+            setupImageDesign()
+        }
+    }
+    
     static let CELL_ID = "MainVCCell"
 
     func showLoader(){
@@ -33,5 +48,24 @@ class SongCellView: UITableViewCell {
         songImageView.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
         songImageView.layer.cornerRadius = songImageView.frame.height/8
         songImageView.clipsToBounds = true
+    }
+}
+
+extension UIImageView {
+    
+    
+    func loadImageUsignUrlString(urlString : String) {
+        image = nil
+        //LOADING IMAGES ASYNCHRONIOUSLY TO CELL
+        let url = URL(string: urlString)
+        URLSession.shared.dataTask(with: url!) { data, response, error in
+            if error != nil {
+                print("error : \(error!)")
+                return
+            }
+            DispatchQueue.main.async(execute: {
+                self.image = UIImage(data: data!)
+            })
+            }.resume()
     }
 }

@@ -13,8 +13,10 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-    var songImageArray = [String : UIImage?]()
-    var songArray = [SongDetailsModel]()
+//    var songImageArray = [String : UIImage?]()
+//    var songArray = [SongDetails]()
+    var songViewModels = [SongViewModel]()
+    var songArray = [Song]()
     var searchedText = ""
     let networkDelegate = NetworkManager()
     
@@ -40,7 +42,7 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return songArray.count
+        return songViewModels.count
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -49,18 +51,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCellView.CELL_ID, for: indexPath) as? SongCellView else { return UITableViewCell() }
-        cell.showLoader()
-        cell.songNameLabel.text = songArray[indexPath.row].title
-        
-        //REMOVING THE PREVIOUS IMAGE THAT THE CELL HELD
-        cell.songImageView?.image = nil
-        
-        if songImageArray[songArray[indexPath.row].title] != nil {
-            cell.songImageView?.image = songImageArray[songArray[indexPath.row].title]!!
-            cell.hideLoader()
-        }
-        
-        cell.setupImageDesign()
+        cell.songViewModel = songViewModels[indexPath.row]
+
         return cell
     }
     
@@ -70,7 +62,8 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
             destinationVC.songArray = songArray
-            destinationVC.imageDic = songImageArray
+//            destinationVC.imageDic = songImageArray
+            
             // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
             destinationVC.songIndex = indexPath!.row
         }
@@ -79,8 +72,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
 
 extension MainViewController : NetworkDelegate {
     
-    func receivedSongArray(songArr: [SongDetailsModel]) {
+    func receivedSongArray(songArr: [Song]) {
         songArray = songArr
+        //TRANSFORMING Song ARRAY TO SongViewModel ARRAY
+        songViewModels = songArr.map { return SongViewModel(songDetails: $0) }
+//        songArray = songArr
         DispatchQueue.main.sync {
             tableView.reloadData()
         }
@@ -91,7 +87,7 @@ extension MainViewController : NetworkDelegate {
 //        self.tableView.reloadData()
 //
 //        for i in 0..<songImageArray.count {
-//            if songImageArray[songArray[i].title] == nil {
+//            if songImageArray[songs[i].title] == nil {
 //                songImageArray[songArray[i].title] = UIImage(named: Constants.NO_IMG)
 //            }
 //        }

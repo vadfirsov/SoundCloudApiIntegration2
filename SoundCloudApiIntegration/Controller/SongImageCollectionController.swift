@@ -17,8 +17,7 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
     
-    var songArray = [SongDetailsModel]()
-    var imageDic = [String : UIImage?]()
+    var songs = [Song]()
     var songIndex = 0
     var isLoaded = false
     
@@ -36,13 +35,12 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
         
     }
     
-    
     // ------------------------- SETTING UP THE COLLECTION VIEW ----------------------------
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isLoaded == false {
             //DISPLAY THE VALUE IN THE INDEX ARRAY THAT WAS PRASSED + TOTAL VALUES IN THE INDEX TO ENABLE SCROLLING BACK FROM INDEX 0
-            indexShmindex = songIndex + (songArray.count * 10)
+            indexShmindex = songIndex + (songs.count * 100)
             let indexToScrollTo = IndexPath(item: indexShmindex, section: 0)
             collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
         }
@@ -61,11 +59,11 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SongImageCellView.PLAYERVC_CELL_ID, for: indexPath) as? SongImageCellView else { return UICollectionViewCell() }
-        if imageDic[songArray[indexPath.row % imageDic.count].title] != nil {
-            cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
-        }
+        //indexPath.row = songIndex + (songs.count * 100)
+        //indexPath.row % songs.count = INDEX TO SHOW
+        cell.song = songs[indexPath.row % songs.count]
+        print("\(indexPath.row) % \(songs.count) = \(indexPath.row % songs.count)")
         
-        cell.setupImageDesign()
         return cell
     }
     

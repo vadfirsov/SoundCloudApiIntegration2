@@ -11,8 +11,8 @@ import UIKit
 
 class PlayerController: UIViewController {
 
-    var songArray = [SongDetailsModel]()
-    var imageDic = [String : UIImage?]()
+    var songViewModel = [SongViewModel]()
+    var songArray = [Song]()
     var songIndex = 0
     
     let pauseString = "PAUSE"
@@ -43,8 +43,7 @@ class PlayerController: UIViewController {
         songNameLabel.text = songArray[songIndex].title
         
         //PASSING RELEVANT INFO TO COLLECTION VIEW TO PRESENT THE SONG IMAGES
-        myCollectionViewController.songArray = songArray
-        myCollectionViewController.imageDic = imageDic
+        myCollectionViewController.songs = songArray
         myCollectionViewController.songIndex = songIndex
     }
     
@@ -161,7 +160,7 @@ class PlayerController: UIViewController {
                 if self.player.audioPlayer!.currentTime >= self.player.audioPlayer!.duration - 1.0 {
                     self.songEnded()
                 }
-
+                //BUG
                 guard self.player.audioPlayer!.isPlaying else { return }
                 self.sliderOutlet.value = Float(self.player.audioPlayer!.currentTime)
             }
