@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
+class MainViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
@@ -48,7 +48,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: MainVCCell.CELL_ID, for: indexPath) as? MainVCCell else { return UITableViewCell() }
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCellView.CELL_ID, for: indexPath) as? SongCellView else { return UITableViewCell() }
         cell.showLoader()
         cell.songNameLabel.text = songArray[indexPath.row].title
         
@@ -65,7 +65,7 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        guard let destinationVC = segue.destination as? PlayerView else { return }
+        guard let destinationVC = segue.destination as? PlayerController else { return }
         let indexPath = tableView.indexPathForSelectedRow
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
@@ -77,7 +77,8 @@ class MainVC: UIViewController, UITableViewDelegate, UITableViewDataSource, UISe
     }
 }
 
-extension MainVC : NetworkDelegate {
+extension MainViewController : NetworkDelegate {
+    
     func receivedSongArray(songArr: [SongDetailsModel]) {
         songArray = songArr
         DispatchQueue.main.sync {
@@ -86,13 +87,14 @@ extension MainVC : NetworkDelegate {
     }
     
     func receivedSongImages(imageDic: [String : UIImage?]) {
-        songImageArray = imageDic
-        tableView.reloadData()
-        for i in 0..<songImageArray.count {
-            if songImageArray[songArray[i].title] == nil {
-                songImageArray[songArray[i].title] = UIImage(named: Constants.NO_IMG)
-            }
-        }
+//        songImageArray = imageDic
+//        self.tableView.reloadData()
+//
+//        for i in 0..<songImageArray.count {
+//            if songImageArray[songArray[i].title] == nil {
+//                songImageArray[songArray[i].title] = UIImage(named: Constants.NO_IMG)
+//            }
+//        }
     }
     
     

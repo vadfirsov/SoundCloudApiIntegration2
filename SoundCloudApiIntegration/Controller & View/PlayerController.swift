@@ -9,7 +9,7 @@
 import UIKit
 
 
-class PlayerView: UIViewController {
+class PlayerController: UIViewController {
 
     var songArray = [SongDetailsModel]()
     var imageDic = [String : UIImage?]()
@@ -18,11 +18,11 @@ class PlayerView: UIViewController {
     let pauseString = "PAUSE"
     let playString = "PLAY"
     
-    var myCollectionViewController: PlayerCollectionView!
+    var myCollectionViewController: SongImageCollectionController!
     
     var networkManager = NetworkManager()
 
-    var player = Player()
+    var player = PlayerModel()
     
     var timer = Timer()
     
@@ -68,7 +68,7 @@ class PlayerView: UIViewController {
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let myCollectionViewController = segue.destination as? PlayerCollectionView {
+        if let myCollectionViewController = segue.destination as? SongImageCollectionController {
             self.myCollectionViewController = myCollectionViewController
         }
     }

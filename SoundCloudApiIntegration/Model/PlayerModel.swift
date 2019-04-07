@@ -9,7 +9,7 @@
 import Foundation
 import AVFoundation
 
-class Player {
+class PlayerModel {
     
     //SET TO OPTIONAL IN ORDER TO DEALLOC WHEN WANT TO STOP PLAYING
 //    var player : AVPlayer?
@@ -48,7 +48,7 @@ class Player {
     }
 }
 
-extension Player : NetworkDelegate {
+extension PlayerModel : NetworkDelegate {
     func downloadCompleted(data: Data) {
         let data = data
         do {

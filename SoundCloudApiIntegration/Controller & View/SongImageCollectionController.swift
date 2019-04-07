@@ -9,7 +9,7 @@
 import UIKit
 import AVFoundation
 
-class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class SongImageCollectionController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     //TO-DO: ADD LOADER WHEN SONG LOADING
     
     //WHATS THE DIFFERENCE BETWEEN private var collectionViewFlowLayout = UICollectionViewFlowLayout() AND THIS?
@@ -24,7 +24,7 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
     
     var indexShmindex = 0
     
-    var playerDelegate = PlayerView()
+    var playerDelegate = PlayerController()
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToNextCell(i:)) , name: .nextButtonPressed, object: nil)
@@ -60,9 +60,10 @@ class PlayerCollectionView : UICollectionViewController, UICollectionViewDelegat
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PlayerVCCell.PLAYERVC_CELL_ID, for: indexPath) as? PlayerVCCell else { return UICollectionViewCell() }
-
-        cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SongImageCellView.PLAYERVC_CELL_ID, for: indexPath) as? SongImageCellView else { return UICollectionViewCell() }
+        if imageDic[songArray[indexPath.row % imageDic.count].title] != nil {
+            cell.songImage.image = imageDic[songArray[indexPath.row % imageDic.count].title]!!
+        }
         
         cell.setupImageDesign()
         return cell

@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PlayerVCCell: UICollectionViewCell {
+class SongImageCellView: UICollectionViewCell {
     
     @IBOutlet weak var songImage: UIImageView!
     @IBOutlet weak var songNameLabel: UILabel!

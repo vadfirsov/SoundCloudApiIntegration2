@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MainVCCell: UITableViewCell {
+class SongCellView: UITableViewCell {
     
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var songImageView: UIImageView!

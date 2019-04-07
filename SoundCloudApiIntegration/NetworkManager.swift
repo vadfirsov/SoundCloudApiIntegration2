@@ -34,7 +34,7 @@ class NetworkManager {
 //                self.networkDelegate?.receivedError(error: <#T##Error#>)
             }
             self.networkDelegate?.receivedSongArray(songArr: self.songArray)
-            self.downloadSongImagesAndTitle()
+//            self.downloadSongImagesAndTitle()
 
         }.resume()
 
@@ -43,6 +43,7 @@ class NetworkManager {
     //TO-DO: DOWNLOAD AND PUT IMAGE EACH IN A TIME AND ADD LOADING ICON
     func downloadSongImagesAndTitle() {
         var imageArr = [String : UIImage?]()
+
         DispatchQueue.main.async {
             for i in self.songArray.indices {
                 if (self.songArray[i].artwork_url != nil) {
@@ -60,6 +61,7 @@ class NetworkManager {
             self.networkDelegate?.receivedSongImages(imageDic: imageArr)
         }
     }
+    
     var task : URLSessionTask?
 
     func getSong(songID : String) {
