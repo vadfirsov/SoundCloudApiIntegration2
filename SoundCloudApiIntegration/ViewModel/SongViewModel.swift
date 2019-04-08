@@ -16,15 +16,9 @@ struct SongViewModel {
     //DEPENDENCY INJECTION (DI)
     init(songDetails : Song) {
         self.songTitle = songDetails.title
-//        if songDetails.artwork_url != nil {
-//            self.imageView.loadImageUsignUrlString(urlString: songDetails.artwork_url!)
-//        } else {
-//            self.imageView.image = UIImage(named: Constants.NO_IMG)
-//        }
         self.artWorkUrlString = songDetails.artwork_url
-        
-    }
     
+    }
 }
 
 

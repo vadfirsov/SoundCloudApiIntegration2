@@ -21,7 +21,6 @@ class NetworkManager {
     
     func fetchSongArray(songName : String) {
         let url = URL(string: BASE_URL + GET_ARR_URL + songName)
-        print(url!)
 //        let requestURL = URLRequest(url: url!) whats the difference??
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             guard let data = data else { return }
@@ -34,32 +33,9 @@ class NetworkManager {
 //                self.networkDelegate?.receivedError(error: <#T##Error#>)
             }
             self.networkDelegate?.receivedSongArray(songArr: self.songArray)
-//            self.downloadSongImagesAndTitle()
 
         }.resume()
 
-    }
-    //DOWNLOADING THE IMAGES (PUTTING THE LABELS IN THE CELLS FIRST AND AFTER THE DOWNLOAD IS FINISHED PUTING THE IMAGE)
-    //TO-DO: DOWNLOAD AND PUT IMAGE EACH IN A TIME AND ADD LOADING ICON
-    func downloadSongImagesAndTitle() {
-        var imageArr = [String : UIImage?]()
-
-        DispatchQueue.main.async {
-            for i in self.songArray.indices {
-                if (self.songArray[i].artwork_url != nil) {
-                    do {
-                        let imageUrl = URL(string: self.songArray[i].artwork_url!)
-                        let data = try Data(contentsOf: imageUrl!)
-                        imageArr[self.songArray[i].title] = UIImage(data: data)
-                    } catch let err {
-                        print ("Error : \(err.localizedDescription)")
-                    }
-                } else {
-                    imageArr[self.songArray[i].title] = nil
-                }
-            }
-            self.networkDelegate?.receivedSongImages(imageDic: imageArr)
-        }
     }
     
     var task : URLSessionTask?
@@ -70,6 +46,9 @@ class NetworkManager {
         //DOWNLOADS THE SONG IN THE URL AND PUTS IT IN DATA
         if let songUrl = songUrl {
             task = URLSession.shared.dataTask(with: songUrl, completionHandler: { data, response, error in
+                if error != nil {
+                    print("UH-OH! ERROR ACCURED! \(error!)")
+                }
                 if let data = data {
                     self.networkDelegate?.downloadCompleted(data: data)
                 }

@@ -18,41 +18,34 @@ class PlayerController: UIViewController {
     let pauseString = "PAUSE"
     let playString = "PLAY"
     
-    var myCollectionViewController: SongImageCollectionController!
-    
     var networkManager = NetworkManager()
 
     var player = PlayerModel()
     
+    var dasdsad : SongImageCollectionController?
+
     var timer = Timer()
-    
     
     @IBOutlet weak var songNameLabel: UILabel!
     @IBOutlet weak var playPauseOutlet: UIButton!
-    
     @IBOutlet weak var sliderOutlet: UISlider!
     
-
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        NotificationCenter.default.addObserver(self, selector: #selector(setupSlider(i:)), name: .songDidDownload, object: nil)
-        
+//        dasdsad.songIndex = songIndex
+//        dasdsad.songs = songArray
+//        dasdsad.imageScrollDelegate = self
+//        NotificationCenter.default.addObserver(self, selector: #selector(someFunc), name: .scrolledToNextSong, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(setupSlider), name: .songDidDownload, object: nil)
         networkManager.networkDelegate = player
-        
         songNameLabel.text = songArray[songIndex].title
         
-        //PASSING RELEVANT INFO TO COLLECTION VIEW TO PRESENT THE SONG IMAGES
-        myCollectionViewController.songs = songArray
-        myCollectionViewController.songIndex = songIndex
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //DOWNLOAD AND PLAY THE SONG FROM URL
         networkManager.getSong(songID: String(songArray[songIndex].id))
-        
-        
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -63,26 +56,31 @@ class PlayerController: UIViewController {
         timer.invalidate()
         
         networkManager.task?.cancel()
-        
     }
     
+    //PASSING RELEVANT INFO TO COLLECTION VIEW TO PRESENT THE IMAGE COLLECTION VIEW
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        if let myCollectionViewController = segue.destination as? SongImageCollectionController {
-            self.myCollectionViewController = myCollectionViewController
-        }
+//        guard let destinatiocVC = segue.destination as? SongImageCollectionController else { return }
+        dasdsad = segue.destination as? SongImageCollectionController
+        dasdsad?.songs = songArray
+        dasdsad?.songIndex = songIndex
+        dasdsad?.imageScrollDelegate = self
+        
+        
+        
     }
     
     // ---------------------------------- PLAYER BUTTONS -------------------------------------
 
     @IBAction func nextButton(_ sender: UIButton) {
         //CANCEL THE DOWNLOAD IF IT WASNT COMPLETED YET
+
         networkManager.task?.cancel()
         timer.invalidate()
         //CALCULATES THE NEW SONG INDEX
         songIndex = player.getNewSongIndex(isNextPressed: true, songCount: songArray.count, songIndex: songIndex)
         //SETS NEW SONG NAME LABEL, IMAGE AND STARTS STREAMING THE SONG
         setNewSong(withNotificationName: .nextButtonPressed, andSongIndex: songIndex)
-
     }
     
     @IBAction func prevButton(_ sender: UIButton) {
@@ -132,13 +130,14 @@ class PlayerController: UIViewController {
         player.audioPlayer?.play()
     }
     
-    @objc func setupSlider(i:Int) {
+    @objc func setupSlider() {
         DispatchQueue.main.sync {
-            let songDuration = Float(player.audioPlayer!.duration)
-            sliderOutlet.value = 0.0
-            sliderOutlet.maximumValue = songDuration
-            print(sliderOutlet.maximumValue)
-            StartSliderUpdateTimer()
+            if player.audioPlayer != nil {
+                let songDuration = Float(player.audioPlayer!.duration)
+                sliderOutlet.value = 0.0
+                sliderOutlet.maximumValue = songDuration
+                StartSliderUpdateTimer()
+            }
         }
     }
     
@@ -160,13 +159,26 @@ class PlayerController: UIViewController {
                 if self.player.audioPlayer!.currentTime >= self.player.audioPlayer!.duration - 1.0 {
                     self.songEnded()
                 }
-                //BUG
-                guard self.player.audioPlayer!.isPlaying else { return }
-                self.sliderOutlet.value = Float(self.player.audioPlayer!.currentTime)
+                if self.player.audioPlayer != nil {
+                    self.sliderOutlet.value = Float(self.player.audioPlayer!.currentTime)
+                }
             }
-
         })
     }
 }
+
+extension PlayerController : ImageScrollDelegate {
+    func didScrollToNewIndex(indexScrolledTo: Int) {
+        let indexToScrollTo = indexScrolledTo
+        player.audioPlayer = nil
+        networkManager.task?.cancel()
+        timer.invalidate()
+        songNameLabel.text = songArray[indexToScrollTo].title
+        //START STREAMING NEW SONG
+        networkManager.getSong(songID: String(songArray[indexToScrollTo].id))
+        playPauseOutlet.setTitle(pauseString, for: .normal)
+    }
+}
+
 
 

@@ -13,6 +13,7 @@
 		DA0850522253A08400A54D69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = DA0850512253A08400A54D69 /* Assets.xcassets */; };
 		DA0850552253A08400A54D69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = DA0850532253A08400A54D69 /* LaunchScreen.storyboard */; };
 		DA17C4BD2259E2D500A4CDE7 /* SongViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA17C4BC2259E2D500A4CDE7 /* SongViewModel.swift */; };
+		DA40D69E225A0DEA00746F84 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = DA40D69D225A0DEA00746F84 /* Extensions.swift */; };
 		DAAEACFE2253A5E000C4BCFA /* SongCellView.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEACFD2253A5E000C4BCFA /* SongCellView.swift */; };
 		DAAEAD002253B3F800C4BCFA /* NetworkManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */; };
 		DAAEAD0222547A9100C4BCFA /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = DAAEAD0122547A9100C4BCFA /* Song.swift */; };
@@ -33,6 +34,7 @@
 		DA0850542253A08400A54D69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		DA0850562253A08400A54D69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		DA17C4BC2259E2D500A4CDE7 /* SongViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongViewModel.swift; sourceTree = "<group>"; };
+		DA40D69D225A0DEA00746F84 /* Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		DAAEACFD2253A5E000C4BCFA /* SongCellView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SongCellView.swift; sourceTree = "<group>"; };
 		DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkManager.swift; sourceTree = "<group>"; };
 		DAAEAD0122547A9100C4BCFA /* Song.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
@@ -74,16 +76,14 @@
 		DA0850492253A08300A54D69 /* SoundCloudApiIntegration */ = {
 			isa = PBXGroup;
 			children = (
-				DA08504A2253A08300A54D69 /* AppDelegate.swift */,
-				DAAEAD0322549FF600C4BCFA /* Constants.swift */,
+				DA40D69F225A0E6500746F84 /* Service */,
 				DA17C4BB2259E2B300A4CDE7 /* ViewModel */,
 				DA17C4B72259CBDF00A4CDE7 /* View */,
 				DA1383692255EFE100DF795C /* Controller */,
 				DA1383682255EFB200DF795C /* Model */,
-				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
-				DAF3471E225725B50032AC66 /* NetworkDelegate.swift */,
+				DA40D6A0225A0E7900746F84 /* Network */,
+				DA40D6A1225A0E8800746F84 /* Helper */,
 				DA0850512253A08400A54D69 /* Assets.xcassets */,
-				DA0850532253A08400A54D69 /* LaunchScreen.storyboard */,
 				DA0850562253A08400A54D69 /* Info.plist */,
 			);
 			path = SoundCloudApiIntegration;
@@ -111,6 +111,7 @@
 		DA17C4B72259CBDF00A4CDE7 /* View */ = {
 			isa = PBXGroup;
 			children = (
+				DA0850532253A08400A54D69 /* LaunchScreen.storyboard */,
 				DA08504E2253A08300A54D69 /* Main.storyboard */,
 				DAAEAD052254AF7E00C4BCFA /* SongImageCellView.swift */,
 				DAAEACFD2253A5E000C4BCFA /* SongCellView.swift */,
@@ -124,6 +125,32 @@
 				DA17C4BC2259E2D500A4CDE7 /* SongViewModel.swift */,
 			);
 			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		DA40D69F225A0E6500746F84 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				DA08504A2253A08300A54D69 /* AppDelegate.swift */,
+				DAAEAD0322549FF600C4BCFA /* Constants.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		DA40D6A0225A0E7900746F84 /* Network */ = {
+			isa = PBXGroup;
+			children = (
+				DAAEACFF2253B3F800C4BCFA /* NetworkManager.swift */,
+				DAF3471E225725B50032AC66 /* NetworkDelegate.swift */,
+			);
+			path = Network;
+			sourceTree = "<group>";
+		};
+		DA40D6A1225A0E8800746F84 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				DA40D69D225A0DEA00746F84 /* Extensions.swift */,
+			);
+			path = Helper;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -205,6 +232,7 @@
 				DA08504D2253A08300A54D69 /* MainViewController.swift in Sources */,
 				DABBF8A42255E4AB00F78A5D /* SongImageCollectionController.swift in Sources */,
 				DA08504B2253A08300A54D69 /* AppDelegate.swift in Sources */,
+				DA40D69E225A0DEA00746F84 /* Extensions.swift in Sources */,
 				DAAEAD0222547A9100C4BCFA /* Song.swift in Sources */,
 				DAAEAD062254AF7E00C4BCFA /* SongImageCellView.swift in Sources */,
 				DAAEAD0422549FF600C4BCFA /* Constants.swift in Sources */,

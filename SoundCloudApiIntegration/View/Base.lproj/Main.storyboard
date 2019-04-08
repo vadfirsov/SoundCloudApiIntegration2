@@ -31,7 +31,7 @@
                                     </connections>
                                 </searchBar>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainVCCell" rowHeight="127" id="Cnr-lv-Bzn" customClass="SongCellView" customModule="SoundCloudApiIntegration" customModuleProvider="target">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="MainVCCell" rowHeight="127" id="Cnr-lv-Bzn" customClass="SongCellView" customModule="SoundCloudApiIntegration" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="72" width="414" height="127"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="Cnr-lv-Bzn" id="JXW-al-nnT">
@@ -113,7 +113,7 @@
                                     <constraint firstAttribute="width" secondItem="xGO-Tw-NW2" secondAttribute="height" multiplier="1:1" id="Put-eB-KJl"/>
                                 </constraints>
                                 <connections>
-                                    <segue destination="Mmh-Gc-6o8" kind="embed" id="7d0-lP-AAO"/>
+                                    <segue destination="Mmh-Gc-6o8" kind="embed" identifier="showContainer" id="7d0-lP-AAO"/>
                                 </connections>
                             </containerView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" alignment="top" translatesAutoresizingMaskIntoConstraints="NO" id="cqb-14-iIM">
@@ -209,8 +209,8 @@
         <scene sceneID="gtM-qN-kf0">
             <objects>
                 <collectionViewController id="Mmh-Gc-6o8" customClass="SongImageCollectionController" customModule="SoundCloudApiIntegration" customModuleProvider="target" sceneMemberID="viewController">
-                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" dataMode="prototypes" id="FmB-hH-qKR">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="354"/>
+                    <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsVerticalScrollIndicator="NO" dataMode="prototypes" id="FmB-hH-qKR">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="414"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <collectionViewFlowLayout key="collectionViewLayout" scrollDirection="horizontal" minimumLineSpacing="10" minimumInteritemSpacing="10" id="Zbw-dK-vqd">
@@ -221,7 +221,7 @@
                         </collectionViewFlowLayout>
                         <cells>
                             <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="redraw" reuseIdentifier="playerVCCell" id="nhc-Ma-L0k" customClass="SongImageCellView" customModule="SoundCloudApiIntegration" customModuleProvider="target">
-                                <rect key="frame" x="0.0" y="-168" width="379" height="690"/>
+                                <rect key="frame" x="0.0" y="-138" width="379" height="690"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
                                     <rect key="frame" x="0.0" y="0.0" width="379" height="690"/>
@@ -254,7 +254,7 @@
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="iDG-Dl-9us" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="3616.8000000000002" y="-103.44827586206897"/>
+            <point key="canvasLocation" x="3593" y="-101"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Qig-pt-Yjx">

@@ -80,18 +80,5 @@ extension MainViewController : NetworkDelegate {
         DispatchQueue.main.sync {
             tableView.reloadData()
         }
-    }
-    
-    func receivedSongImages(imageDic: [String : UIImage?]) {
-//        songImageArray = imageDic
-//        self.tableView.reloadData()
-//
-//        for i in 0..<songImageArray.count {
-//            if songImageArray[songs[i].title] == nil {
-//                songImageArray[songArray[i].title] = UIImage(named: Constants.NO_IMG)
-//            }
-//        }
-    }
-    
-    
+    } 
 }

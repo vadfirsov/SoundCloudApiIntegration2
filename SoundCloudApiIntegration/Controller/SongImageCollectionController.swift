@@ -9,39 +9,42 @@
 import UIKit
 import AVFoundation
 
+protocol ImageScrollDelegate {
+    func didScrollToNewIndex(indexScrolledTo : Int)
+}
+
 class SongImageCollectionController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
-    //TO-DO: ADD LOADER WHEN SONG LOADING
     
     //WHATS THE DIFFERENCE BETWEEN private var collectionViewFlowLayout = UICollectionViewFlowLayout() AND THIS?
     private var collectionViewFlowLayout : UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
-    
+//    var pageControl = UIPageControl() WHATS DAT?
     var songs = [Song]()
     var songIndex = 0
     var isLoaded = false
     
-    var indexShmindex = 0
+    var scrollToIndex = 0
     
-    var playerDelegate = PlayerController()
+    var imageScrollDelegate : ImageScrollDelegate?
+        
     override func viewDidLoad() {
         super.viewDidLoad()
-        NotificationCenter.default.addObserver(self, selector: #selector(scrollToNextCell(i:)) , name: .nextButtonPressed, object: nil)
-        NotificationCenter.default.addObserver(self, selector: #selector(scrollToPrevCell(i:)) , name: .prevButtonPressed, object: nil)
-
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToNextCell) , name: .nextButtonPressed, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(scrollToPrevCell) , name: .prevButtonPressed, object: nil)
 
         //SPACING BETWEEN EACH CELL
         collectionViewFlowLayout.minimumLineSpacing = 0
-        
     }
     
     // ------------------------- SETTING UP THE COLLECTION VIEW ----------------------------
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isLoaded == false {
-            //DISPLAY THE VALUE IN THE INDEX ARRAY THAT WAS PRASSED + TOTAL VALUES IN THE INDEX TO ENABLE SCROLLING BACK FROM INDEX 0
-            indexShmindex = songIndex + (songs.count * 100)
-            let indexToScrollTo = IndexPath(item: indexShmindex, section: 0)
+            //DISPLAY THE VALUE IN THE ELEMENT THAT WAS PRASSED + TOTAL VALUES IN THE INDEX TO ENABLE SCROLLING BACK FROM INDEX 0
+            songIndex = songIndex + (songs.count * 100)
+            scrollToIndex = songIndex
+            let indexToScrollTo = IndexPath(item: songIndex, section: 0)
             collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
         }
         isLoaded = true
@@ -56,15 +59,21 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
         return 100000
     }
     
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        //GETTING THE NEXT SONG INDEX
+        let x = targetContentOffset.pointee.x
+        let index = Int(x / view.frame.width) % songs.count
+        imageScrollDelegate?.didScrollToNewIndex(indexScrolledTo : index)
+    }
+    
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SongImageCellView.PLAYERVC_CELL_ID, for: indexPath) as? SongImageCellView else { return UICollectionViewCell() }
-        //indexPath.row = songIndex + (songs.count * 100)
-        //indexPath.row % songs.count = INDEX TO SHOW
-        cell.song = songs[indexPath.row % songs.count]
-        print("\(indexPath.row) % \(songs.count) = \(indexPath.row % songs.count)")
-        
+        //MODULE MAKES IT POSSIBLE TO SCROLL "FOREVER" TO EACH DIRECTION
+        let index = indexPath.row % songs.count
+        cell.song = songs[index]
         return cell
+        
     }
     
     //MAKES THE CELL THE SIZE OF THE VIEW
@@ -72,26 +81,20 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
         return CGSize(width: collectionView.frame.width, height: collectionView.frame.height)
     }
     
-    @objc func scrollToNextCell(i : Int){
-        indexShmindex += 1
-        let indexPathToScrollTo = IndexPath(row: indexShmindex, section: 0)
+    //NOTIFICATION OBSORVER FUNCS
+    @objc func scrollToNextCell(){
+        scrollToIndex += 1
+        print(view.frame.width)
+        let indexPathToScrollTo = IndexPath(row: scrollToIndex, section: 0)
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
 
     }
-    
-    @objc func scrollToPrevCell(i : Int){
-        indexShmindex -= 1
-        let indexPathToScrollTo = IndexPath(row: indexShmindex, section: 0)
+    @objc func scrollToPrevCell(){
+        scrollToIndex -= 1
+        let indexPathToScrollTo = IndexPath(row: scrollToIndex, section: 0)
+        print(scrollToIndex)
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
-        
     }
-    
-    
 }
 
-extension Notification.Name {
-    static let nextButtonPressed = Notification.Name(rawValue: "nextButtonPressed")
-    static let prevButtonPressed = Notification.Name(rawValue: "prevButtonPressed")
-    static let songDidDownload = Notification.Name(rawValue: "songDidDownload") //DOESNT BELONG HERE
 
-}

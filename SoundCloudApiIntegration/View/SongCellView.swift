@@ -51,21 +51,4 @@ class SongCellView: UITableViewCell {
     }
 }
 
-extension UIImageView {
-    
-    
-    func loadImageUsignUrlString(urlString : String) {
-        image = nil
-        //LOADING IMAGES ASYNCHRONIOUSLY TO CELL
-        let url = URL(string: urlString)
-        URLSession.shared.dataTask(with: url!) { data, response, error in
-            if error != nil {
-                print("error : \(error!)")
-                return
-            }
-            DispatchQueue.main.async(execute: {
-                self.image = UIImage(data: data!)
-            })
-            }.resume()
-    }
-}
+
