@@ -10,24 +10,20 @@ import UIKit
 import AVFoundation
 
 protocol ImageScrollDelegate {
-    func didScrollToNewIndex(indexScrolledTo : Int)
+    func didScrollToNewImage()
 }
 
-class SongImageCollectionController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class ImageCollectionController : UICollectionViewController, UICollectionViewDelegateFlowLayout {
     
-    //WHATS THE DIFFERENCE BETWEEN private var collectionViewFlowLayout = UICollectionViewFlowLayout() AND THIS?
     private var collectionViewFlowLayout : UICollectionViewFlowLayout {
         return collectionViewLayout as! UICollectionViewFlowLayout
     }
-//    var pageControl = UIPageControl() WHATS DAT?
-    var songs = [Song]()
-    var songIndex = 0
-    var isLoaded = false
-    
-    var scrollToIndex = 0
     
     var imageScrollDelegate : ImageScrollDelegate?
-        
+    var songs = [Song]()
+    var scrollToIndex = 0
+    var isLoaded = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         NotificationCenter.default.addObserver(self, selector: #selector(scrollToNextCell) , name: .nextButtonPressed, object: nil)
@@ -41,15 +37,14 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
     
     override func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         if isLoaded == false {
+            print(Constants.shared.songIndex)
             //DISPLAY THE VALUE IN THE ELEMENT THAT WAS PRASSED + TOTAL VALUES IN THE INDEX TO ENABLE SCROLLING BACK FROM INDEX 0
-            songIndex = songIndex + (songs.count * 100)
-            scrollToIndex = songIndex
-            let indexToScrollTo = IndexPath(item: songIndex, section: 0)
+            scrollToIndex = Constants.shared.songIndex + (songs.count * 100)
+            let indexToScrollTo = IndexPath(item: scrollToIndex, section: 0)
             collectionView.scrollToItem(at: indexToScrollTo, at: .left, animated: false)
         }
         isLoaded = true
     }
-    
     
     func calculateSectionInsert() -> CGFloat {
         return 40
@@ -62,8 +57,9 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         //GETTING THE NEXT SONG INDEX
         let x = targetContentOffset.pointee.x
-        let index = Int(x / view.frame.width) % songs.count
-        imageScrollDelegate?.didScrollToNewIndex(indexScrolledTo : index)
+        Constants.shared.songIndex = Int(x / view.frame.width) % songs.count
+        scrollToIndex = Int(x / view.frame.width)
+        imageScrollDelegate?.didScrollToNewImage()
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -73,7 +69,6 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
         let index = indexPath.row % songs.count
         cell.song = songs[index]
         return cell
-        
     }
     
     //MAKES THE CELL THE SIZE OF THE VIEW
@@ -84,15 +79,15 @@ class SongImageCollectionController : UICollectionViewController, UICollectionVi
     //NOTIFICATION OBSORVER FUNCS
     @objc func scrollToNextCell(){
         scrollToIndex += 1
-        print(view.frame.width)
+
         let indexPathToScrollTo = IndexPath(row: scrollToIndex, section: 0)
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
-
     }
+    
     @objc func scrollToPrevCell(){
         scrollToIndex -= 1
+
         let indexPathToScrollTo = IndexPath(row: scrollToIndex, section: 0)
-        print(scrollToIndex)
         collectionView.scrollToItem(at: indexPathToScrollTo, at: .centeredHorizontally, animated: true)
     }
 }

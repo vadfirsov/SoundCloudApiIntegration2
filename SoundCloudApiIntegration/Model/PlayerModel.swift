@@ -29,7 +29,7 @@ class PlayerModel {
         var indexToGoTo = songIndex
         
         plusOrMinus = isNextPressed ? 1 : -1
-        
+
         if songIndex == songCount - 1 && isNextPressed {
             indexToGoTo = 0
             return indexToGoTo

@@ -13,8 +13,6 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var searchBar: UISearchBar!
     
-//    var songImageArray = [String : UIImage?]()
-//    var songArray = [SongDetails]()
     var songViewModels = [SongViewModel]()
     var songArray = [Song]()
     var searchedText = ""
@@ -23,14 +21,11 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     override func viewDidLoad() {
         super.viewDidLoad()
         networkDelegate.networkDelegate = self
-        //just for now for testing
-        networkDelegate.fetchSongArray(songName: "eminem")
+        
     }
     // SEARCHBAR SET UP AND SEARCH
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        
         if let searchedText = searchBar.text {
-
             tableView.reloadData()
             networkDelegate.fetchSongArray(songName: searchedText)
         }
@@ -52,31 +47,30 @@ class MainViewController: UIViewController, UITableViewDelegate, UITableViewData
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         guard let cell = tableView.dequeueReusableCell(withIdentifier: SongCellView.CELL_ID, for: indexPath) as? SongCellView else { return UITableViewCell() }
         cell.songViewModel = songViewModels[indexPath.row]
+        if indexPath.row % 2 != 0  {
+            cell.backgroundColor = #colorLiteral(red: 0.3179571629, green: 0.4158534408, blue: 0.4780644774, alpha: 1)
+        } else {
+            cell.backgroundColor = #colorLiteral(red: 0.2848196328, green: 0.3723941445, blue: 0.4290009737, alpha: 1)
+        }
 
         return cell
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let destinationVC = segue.destination as? PlayerController else { return }
-        let indexPath = tableView.indexPathForSelectedRow
+        // INDEX SINFLETON = SELECTED ROW INDEX
+        Constants.shared.songIndex = tableView.indexPathForSelectedRow!.row
         
         if segue.identifier == Constants.GO_TO_PLAYERVC_ID {
             destinationVC.songArray = songArray
-//            destinationVC.imageDic = songImageArray
-            
-            // PASSES THE INDEX WHICH TO SHOW IN PLAYER VC
-            destinationVC.songIndex = indexPath!.row
         }
     }
 }
 
 extension MainViewController : NetworkDelegate {
-    
     func receivedSongArray(songArr: [Song]) {
         songArray = songArr
-        //TRANSFORMING Song ARRAY TO SongViewModel ARRAY
         songViewModels = songArr.map { return SongViewModel(songDetails: $0) }
-//        songArray = songArr
         DispatchQueue.main.sync {
             tableView.reloadData()
         }

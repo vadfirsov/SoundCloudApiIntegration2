@@ -28,7 +28,7 @@ class SongImageCellView: UICollectionViewCell {
     func setupImageDesign() {
         songImage.layer.borderWidth = 2
         songImage.layer.masksToBounds = false
-        songImage.layer.borderColor = #colorLiteral(red: 0, green: 0, blue: 0, alpha: 1)
+        songImage.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
         songImage.layer.cornerRadius = songImage.frame.height/8
         songImage.clipsToBounds = true
     }

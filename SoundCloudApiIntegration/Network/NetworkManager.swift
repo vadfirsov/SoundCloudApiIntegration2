@@ -13,15 +13,15 @@ import UIKit
 class NetworkManager {
     
     var networkDelegate : NetworkDelegate?
+    
     let BASE_URL = "https://api.soundcloud.com/tracks"
     let GET_ARR_URL = "?client_id=7447cc9b363c40c4bd203aef5f0410e6&q="
-    
     let GET_SONG_URL = "/stream?client_id=7447cc9b363c40c4bd203aef5f0410e6"
+    
     var songArray = [Song]()
     
     func fetchSongArray(songName : String) {
         let url = URL(string: BASE_URL + GET_ARR_URL + songName)
-//        let requestURL = URLRequest(url: url!) whats the difference??
         URLSession.shared.dataTask(with: url!) { (data, response, error) in
             guard let data = data else { return }
             do {

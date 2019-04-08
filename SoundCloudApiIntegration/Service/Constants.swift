@@ -13,4 +13,13 @@ class Constants {
     static let NO_IMG = "noImage"
     static let GO_TO_PLAYERVC_ID = "goToPlayerVC"
     
+    // SINGELTON OF SONG INDEX
+    var songIndex : Int
+
+    static let shared = Constants(index: 0)
+    
+    private init(index : Int) {
+        self.songIndex = index
+    }
+
 }

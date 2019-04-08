@@ -11,41 +11,44 @@ import UIKit
 
 class PlayerController: UIViewController {
 
+    
     var songViewModel = [SongViewModel]()
     var songArray = [Song]()
     var songIndex = 0
     
     let pauseString = "PAUSE"
     let playString = "PLAY"
+    let nextBtnString = "▷"
+    let prevBtnString = "◁"
     
     var networkManager = NetworkManager()
-
     var player = PlayerModel()
-    
-    var dasdsad : SongImageCollectionController?
+    var imageCollectionView : ImageCollectionController?
 
     var timer = Timer()
     
     @IBOutlet weak var songNameLabel: UILabel!
-    @IBOutlet weak var playPauseOutlet: UIButton!
     @IBOutlet weak var sliderOutlet: UISlider!
+    @IBOutlet weak var prevButtonOutlet: UIButton!
+    @IBOutlet weak var nextButtonOutlet: UIButton!
+    @IBOutlet weak var playPauseOutlet: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        dasdsad.songIndex = songIndex
-//        dasdsad.songs = songArray
-//        dasdsad.imageScrollDelegate = self
-//        NotificationCenter.default.addObserver(self, selector: #selector(someFunc), name: .scrolledToNextSong, object: nil)
+//        Constants.shared.songIndex = songIndex
+        setupButtonOutletDesign(forButton: prevButtonOutlet, andTitle: prevBtnString)
+        setupButtonOutletDesign(forButton: nextButtonOutlet, andTitle: nextBtnString)
+        setupButtonOutletDesign(forButton: playPauseOutlet, andTitle: pauseString)
+        
         NotificationCenter.default.addObserver(self, selector: #selector(setupSlider), name: .songDidDownload, object: nil)
         networkManager.networkDelegate = player
-        songNameLabel.text = songArray[songIndex].title
-        
+        songNameLabel.text = songArray[Constants.shared.songIndex].title
     }
 
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         //DOWNLOAD AND PLAY THE SONG FROM URL
-        networkManager.getSong(songID: String(songArray[songIndex].id))
+        networkManager.getSong(songID: String(songArray[Constants.shared.songIndex].id))
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -54,46 +57,37 @@ class PlayerController: UIViewController {
         player.stopAndDealloc()
         //DEALLOC THE TIMER
         timer.invalidate()
-        
         networkManager.task?.cancel()
     }
     
     //PASSING RELEVANT INFO TO COLLECTION VIEW TO PRESENT THE IMAGE COLLECTION VIEW
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 //        guard let destinatiocVC = segue.destination as? SongImageCollectionController else { return }
-        dasdsad = segue.destination as? SongImageCollectionController
-        dasdsad?.songs = songArray
-        dasdsad?.songIndex = songIndex
-        dasdsad?.imageScrollDelegate = self
-        
-        
-        
+        imageCollectionView = segue.destination as? ImageCollectionController
+        imageCollectionView?.songs = songArray
+//        imageCollectionView?.songIndex = Constants.index //TO DO!!
+        imageCollectionView?.imageScrollDelegate = self
     }
     
     // ---------------------------------- PLAYER BUTTONS -------------------------------------
 
     @IBAction func nextButton(_ sender: UIButton) {
-        //CANCEL THE DOWNLOAD IF IT WASNT COMPLETED YET
-
-        networkManager.task?.cancel()
-        timer.invalidate()
         //CALCULATES THE NEW SONG INDEX
-        songIndex = player.getNewSongIndex(isNextPressed: true, songCount: songArray.count, songIndex: songIndex)
+        Constants.shared.songIndex = player.getNewSongIndex(isNextPressed: true, songCount: songArray.count, songIndex: Constants.shared.songIndex)
+        //SENDS NOTIFICATION TO COLLECTIONVIEW TO SCROLL
+        NotificationCenter.default.post(name: .nextButtonPressed, object: nil)
         //SETS NEW SONG NAME LABEL, IMAGE AND STARTS STREAMING THE SONG
-        setNewSong(withNotificationName: .nextButtonPressed, andSongIndex: songIndex)
+        setNewSong(withSongIndex: Constants.shared.songIndex)
     }
     
     @IBAction func prevButton(_ sender: UIButton) {
-        //CANCEL THE DOWNLOAD IF IT WASNT COMPLETED YET
-        networkManager.task?.cancel()
-        //STOPS THE TIMER
-        timer.invalidate()
         //CALCULATES THE NEW SONG INDEX
-        songIndex = player.getNewSongIndex(isNextPressed: false, songCount: songArray.count, songIndex: songIndex)
+        Constants.shared.songIndex = player.getNewSongIndex(isNextPressed: true, songCount: songArray.count, songIndex: Constants.shared.songIndex)
+        //SENDS NOTIFICATION TO COLLECTIONVIEW TO SCROLL
+        NotificationCenter.default.post(name: .prevButtonPressed, object: nil)
         //SETS NEW SONG NAME LABEL, IMAGE AND STARTS STREAMING THE SONG
-        setNewSong(withNotificationName: .prevButtonPressed, andSongIndex: songIndex)
+        setNewSong(withSongIndex: Constants.shared.songIndex)
     }
-    
     
     @IBAction func playePauseButton(_ sender: UIButton) {
        
@@ -106,15 +100,16 @@ class PlayerController: UIViewController {
         }
     }
 
-    
-    func setNewSong(withNotificationName notificationName : Notification.Name, andSongIndex songIndex : Int) {
+    func setNewSong(withSongIndex songIndex : Int) {
+        //CANCEL THE DOWNLOAD IF IT WASNT COMPLETED YET
+        networkManager.task?.cancel()
+        //STOPS THE TIMER
+        timer.invalidate()
         //SET NEW SONG LABEL
-        songNameLabel.text = songArray[songIndex].title
+        songNameLabel.text = songArray[Constants.shared.songIndex].title
         //START STREAMING NEW SONG
-        networkManager.getSong(songID: String(songArray[songIndex].id))
-        //SENDS NOTIFICATION TO COLLECTIONVIEW TO SCROLL
-        NotificationCenter.default.post(name: notificationName, object: nil)
-        
+        networkManager.getSong(songID: String(songArray[Constants.shared.songIndex].id))
+        //SETS NEW SONG NAME
         playPauseOutlet.setTitle(pauseString, for: .normal)
     }
     
@@ -124,6 +119,7 @@ class PlayerController: UIViewController {
     @IBAction func sliderTouchDown(_ sender: UISlider) {
         player.audioPlayer?.pause()
     }
+    
     //END SLIDING THE SLIDER
     @IBAction func sliderTouchUpInside(_ sender: UISlider) {
         player.audioPlayer?.currentTime = Double(sliderOutlet.value)
@@ -141,23 +137,11 @@ class PlayerController: UIViewController {
         }
     }
     
-    func songEnded() {
-            //CANCEL THE DOWNLOAD IF IT WASNT COMPLETED YET
-            networkManager.task?.cancel()
-            //STOPS THE TIMER
-            timer.invalidate()
-            //CALCULATES THE NEW SONG INDEX
-            songIndex = player.getNewSongIndex(isNextPressed: false, songCount: songArray.count, songIndex: self.songIndex)
-            //SETS NEW SONG NAME LABEL, IMAGE AND STARTS STREAMING THE SONG
-            self.setNewSong(withNotificationName: .prevButtonPressed, andSongIndex: self.songIndex)
-            return
-    }
-    
     func StartSliderUpdateTimer() {
         timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (timer) in
             if self.player.audioPlayer != nil {
                 if self.player.audioPlayer!.currentTime >= self.player.audioPlayer!.duration - 1.0 {
-                    self.songEnded()
+                    self.SongEnded()
                 }
                 if self.player.audioPlayer != nil {
                     self.sliderOutlet.value = Float(self.player.audioPlayer!.currentTime)
@@ -165,18 +149,31 @@ class PlayerController: UIViewController {
             }
         })
     }
+    
+    func SongEnded() {
+        //CALCULATES THE NEW SONG INDEX
+        Constants.shared.songIndex = player.getNewSongIndex(isNextPressed: true, songCount: songArray.count, songIndex: Constants.shared.songIndex)
+        //SENDS NOTIFICATION TO COLLECTIONVIEW TO SCROLL
+        NotificationCenter.default.post(name: .prevButtonPressed, object: nil)
+        //SETS NEW SONG NAME LABEL, IMAGE AND STARTS STREAMING THE SONG
+        setNewSong(withSongIndex: Constants.shared.songIndex)
+    }
+    
+    func setupButtonOutletDesign(forButton button : UIButton, andTitle title : String) {
+    
+        button.layer.borderWidth = 2
+        button.layer.borderColor = #colorLiteral(red: 1, green: 1, blue: 1, alpha: 1)
+        button.layer.cornerRadius = button.frame.height/8
+        button.clipsToBounds = true
+        
+        button.setTitle(title, for: .normal)
+    }
 }
 
 extension PlayerController : ImageScrollDelegate {
-    func didScrollToNewIndex(indexScrolledTo: Int) {
-        let indexToScrollTo = indexScrolledTo
+    func didScrollToNewImage() {
         player.audioPlayer = nil
-        networkManager.task?.cancel()
-        timer.invalidate()
-        songNameLabel.text = songArray[indexToScrollTo].title
-        //START STREAMING NEW SONG
-        networkManager.getSong(songID: String(songArray[indexToScrollTo].id))
-        playPauseOutlet.setTitle(pauseString, for: .normal)
+        setNewSong(withSongIndex: Constants.shared.songIndex)
     }
 }
 
